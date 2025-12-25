@@ -5,7 +5,15 @@
   modulesPath,
   ...
 }:
+let
+  astronautSakura = pkgs.sddm-astronaut.override {
+    embeddedTheme = "pixel_sakura";
+  };
+in
 {
+  environment.systemPackages = [
+    astronautSakura
+  ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
 

@@ -20,6 +20,7 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     neovim
+    wezterm
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
