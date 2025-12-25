@@ -7,7 +7,6 @@
 }:
 {
   boot.loader = {
-    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
 
     grub = {
@@ -16,10 +15,7 @@
       device = "nodev"; # required for EFI
       useOSProber = true;
 
-      theme = pkgs.catppuccin-grub.override {
-        variant = "mocha";
-        flavor = "maroon";
-      };
+      theme = pkgs.catppuccin-grub;
     };
   };
 
