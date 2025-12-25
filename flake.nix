@@ -19,6 +19,12 @@
         specialArgs = { inherit inputs; }; # lets modules access inputs if needed
         modules = [
           ./configuration.nix
+          ./hardware-configuration.nix
+          ./networking.nix
+          ./services.nix
+          ./users.nix
+          ./boot.nix
+          ./console.nix
         ];
       };
     };
