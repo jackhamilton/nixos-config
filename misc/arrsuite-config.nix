@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+    networking.firewall.enable = false;
     security.sudo = {
         enable = true;
         extraRules = [{

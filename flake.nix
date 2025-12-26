@@ -27,7 +27,7 @@
         ./boot.nix
         ./console.nix
         ./services.nix
-        ./users.nix
+        ./user-setups/jack.nix
         ./networking/desktop.nix
       ];
       serverAdditionalCore = [
@@ -77,9 +77,10 @@
             ];
             media_mountpoint = "seafile";
             uid = "seafile";
+            gid = "seafile";
           };
           modules = [
-            ./hardware/seafile-hardware.nix
+            ./hardware/seafile.nix
             ./server-programs/seafile-program.nix
             ./cloud.nix
             ./wireguard.nix
@@ -95,6 +96,7 @@
             ip_address = "192.168.1.19";
             media_mountpoint = "";
             uid = "1000";
+            gid = "1000";
             allowedUDPPorts = [
               8080
               80
@@ -161,6 +163,26 @@
           modules = [
             ./hardware/nginx.nix
             ./server-programs/nginx.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
+
+        # MARK: Template server
+        arrsuite = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "servarr";
+            ip_address = "192.168.1.17";
+            uid = "1000";
+            gid = "media";
+            allowedUDPPorts = [];
+            allowedTCPPorts = [];
+          };
+          modules = [
+            ./hardware/arrsuite.nix
+            ./misc/arrsuite-config.nix
+            ./user-setups/arr-users.nix
+            ./cloud.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
