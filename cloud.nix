@@ -5,6 +5,7 @@
   modulesPath,
   media_mountpoint,
   uid,
+  gid,
   ...
 }:
 let
@@ -21,7 +22,7 @@ in
         "username=jack"
         "password=${media-password}"
         "uid=${uid}"
-        "gid=${uid}"
+        "gid=${gid}"
         "file_mode=0777"
         "dir_mode=0777"
         "noperm"
