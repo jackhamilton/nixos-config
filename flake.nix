@@ -116,7 +116,7 @@
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
-        # MARK: Qbittorrent server
+        # MARK: Radicale server
         radicale = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
