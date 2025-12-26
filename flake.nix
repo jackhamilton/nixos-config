@@ -143,6 +143,28 @@
         };
 
         # MARK: Template server
+        nginx = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "nginx";
+            ip_address = "192.168.1.15";
+            allowedUDPPorts = [
+                80
+                443
+            ];
+            allowedTCPPorts = [
+                80
+                443
+            ];
+          };
+          modules = [
+            ./hardware/nginx.nix
+            ./server-programs/nginx.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
+
+        # MARK: Template server
         template = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
