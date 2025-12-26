@@ -3,6 +3,8 @@
   lib,
   pkgs,
   modulesPath,
+  system,
+  agenix,
   ...
 }:
 {
@@ -24,8 +26,4 @@
     layout = "us";
     variant = "colemak_dh";
   };
-
-  programs.zsh.enable = true;
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
 }

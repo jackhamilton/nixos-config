@@ -11,8 +11,9 @@ let
   };
 in
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     astronautSakura
+    wezterm
   ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
