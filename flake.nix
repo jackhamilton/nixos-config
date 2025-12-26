@@ -2,31 +2,118 @@
   description = "NixOS configuration (flake)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11"; # pick your channel
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-older.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-  let
-    system = "x86_64-linux";
-  in
-  {
-    nixosConfigurations = {
-      # change "my-host" to your hostname
-      nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; }; # lets modules access inputs if needed
-        modules = [
-          ./configuration.nix
-          ./hardware-configuration.nix
-          ./networking.nix
-          ./services.nix
-          ./users.nix
-          ./boot.nix
-          ./console.nix
-        ];
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-older,
+      agenix,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      coreModules = [
+        ./configuration.nix
+        ./zsh.nix
+        agenix.nixosModules.default
+      ];
+      desktopAdditionalCore = [
+        ./boot.nix
+        ./console.nix
+        ./services.nix
+        ./users.nix
+        ./networking/desktop.nix
+      ];
+      serverAdditionalCore = [
+        ./networking/server.nix
+        ./server.nix
+        ./container.nix
+      ];
+    in
+    {
+      nixosConfigurations = {
+        # change "my-host" to your hostname
+        # MARK: Laptop configuration
+        nixos = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit system;
+          }; # lets modules access inputs if needed
+          modules = [
+            ./hardware/laptop.nix
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
+            }
+          ] ++ coreModules ++ desktopAdditionalCore;
+        };
+
+        # MARK: Seafile server
+        seafile = nixpkgs-older.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "seafile";
+            ip_address = "192.168.1.13";
+            allowedTCPPorts = [
+              8000
+              8082
+              8080
+              80
+              443
+            ];
+            allowedUDPPorts = [
+              8000
+              8082
+              8080
+              80
+              443
+            ];
+            media_mountpoint = "seafile";
+            uid = "seafile";
+          };
+          modules = [
+            ./hardware/seafile-hardware.nix
+            ./server-programs/seafile-program.nix
+            ./cloud.nix
+            ./wireguard.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
+
+        # MARK: Qbittorrent server
+        qbittorrent = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "qBittorrent";
+            ip_address = "192.168.1.19";
+            media_mountpoint = "";
+            uid = "1000";
+            allowedUDPPorts = [
+              8080
+              80
+              443
+              9911
+            ];
+            allowedTCPPorts = [
+              8080
+              80
+              443
+              9911
+            ];
+          };
+          modules = [
+            ./hardware/qbittorrent.nix
+            ./server-programs/qbittorrent.nix
+            ./wireguard.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
       };
     };
-  };
 }
