@@ -141,6 +141,21 @@
             ./server-programs/radicale.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
+
+        # MARK: Template server
+        template = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "template";
+            ip_address = "192.168.1.99";
+            allowedUDPPorts = [];
+            allowedTCPPorts = [];
+          };
+          modules = [
+            ./hardware/template.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
       };
     };
 }
