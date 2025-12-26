@@ -112,6 +112,33 @@
             ./hardware/qbittorrent.nix
             ./server-programs/qbittorrent.nix
             ./wireguard.nix
+            ./cloud.nix
+          ] ++ coreModules ++ serverAdditionalCore;
+        };
+
+        # MARK: Qbittorrent server
+        radicale = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            hostname = "radicale";
+            ip_address = "192.168.1.12";
+            allowedUDPPorts = [
+              8080
+              80
+              443
+              5232
+            ];
+            allowedTCPPorts = [
+              8080
+              80
+              443
+              5232
+            ];
+          };
+          modules = [
+            ./hardware/radicale.nix
+            ./server-programs/radicale.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
       };
