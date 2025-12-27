@@ -29,6 +29,7 @@
         ./services.nix
         ./user-setups/jack.nix
         ./networking/desktop.nix
+        ./desktop.nix
       ];
       serverAdditionalCore = [
         ./networking/server.nix
