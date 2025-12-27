@@ -175,6 +175,7 @@
             ip_address = "192.168.1.17";
             uid = "1000";
             gid = "media";
+            media_mountpoint = "";
             allowedUDPPorts = [];
             allowedTCPPorts = [];
           };
