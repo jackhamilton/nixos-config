@@ -1,6 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
-  users.mutableUsers = false;
   users.users.jack = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" ];
