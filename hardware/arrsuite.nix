@@ -17,7 +17,7 @@
     };
 
   fileSystems."/media/share" =
-    { device = "//192.168.1.11/jack";
+    { device = "//192.168.1.11/jack/";
       fsType = "cifs";
     };
 
