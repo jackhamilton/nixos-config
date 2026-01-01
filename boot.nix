@@ -23,8 +23,6 @@ in
       efiSupport = true;
       device = "nodev"; # required for EFI
       useOSProber = true;
-
-      theme = pkgs.catppuccin-grub;
     };
   };
 

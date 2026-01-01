@@ -6,6 +6,7 @@
     nixpkgs-older.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin.url = "github:catppuccin/nix";
     agenix.url = "github:ryantm/agenix";
   };
 
@@ -14,6 +15,7 @@
       nixpkgs,
       nixpkgs-older,
       agenix,
+      catppuccin,
       ...
     }@inputs:
     let
@@ -21,6 +23,7 @@
       coreModules = [
         ./configuration.nix
         ./zsh.nix
+        ./theme.nix
         agenix.nixosModules.default
       ];
       desktopAdditionalCore = [
@@ -30,6 +33,7 @@
         ./user-setups/jack.nix
         ./networking/desktop.nix
         ./desktop.nix
+        catppuccin.nixosModules.catppuccin
       ];
       serverAdditionalCore = [
         ./networking/server.nix
