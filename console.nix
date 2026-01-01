@@ -8,11 +8,19 @@
   ...
 }:
 {
+  environment.systemPackages = [
+    pkgs.xorg.xkeyboardconfig
+  ];
+  systemd.tmpfiles.rules = [
+    "L+ /usr/share/X11/xkb - - - - /run/current-system/sw/share/X11/xkb"
+  ];
+
+
   # Select internationalisation properties.
   i18n = {
     inputMethod = {
-        enable = true;
-        type = "fcitx5";
+      enable = true;
+      type = "fcitx5";
     };
     defaultLocale = "en_US.UTF-8";
   };

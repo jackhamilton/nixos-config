@@ -34,7 +34,7 @@ in
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "sddm-astronaut-theme";
+        theme = lib.mkForce "sddm-astronaut-theme";
         extraPackages = [ pkgs.sddm-astronaut ];
       };
     };
