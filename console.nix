@@ -29,9 +29,4 @@
     font = "Lat2-Terminus16";
     useXkbConfig = true;
   };
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "colemak_dh";
-  };
 }
