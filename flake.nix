@@ -6,14 +6,16 @@
     nixpkgs-older.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-flake.url = "path:./home-manager";
     catppuccin.url = "github:catppuccin/nix";
     agenix.url = "github:ryantm/agenix";
   };
-
   outputs =
     {
       nixpkgs,
       nixpkgs-older,
+      home-manager,
+      home-manager-flake,
       agenix,
       catppuccin,
       ...
@@ -24,6 +26,7 @@
         ./configuration.nix
         ./zsh.nix
         ./theme.nix
+        home-manager.nixosModules.home-manager
         agenix.nixosModules.default
       ];
       desktopAdditionalCore = [
@@ -43,16 +46,34 @@
     in
     {
       nixosConfigurations = {
-        # change "my-host" to your hostname
-        # MARK: Laptop configuration
-        nixos = nixpkgs.lib.nixosSystem {
+        desktop = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs;
             inherit system;
+            hostname = "nixos-desktop";
+          }; # lets modules access inputs if needed
+          modules = [
+            ./hardware/desktop.nix
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jack = home-manager-flake.homeConfigurations.nixos.config;
+            }
+          ] ++ coreModules ++ desktopAdditionalCore;
+        };
+        # MARK: Laptop configuration
+        laptop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit system;
+            hostname = "nixos-laptop";
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/laptop.nix
+	    ./colemak.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }

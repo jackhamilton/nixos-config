@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, hostname, ... }:
 {
-   networking.hostName = "nixos"; # Define your hostname.
+   networking.hostName = hostname; # Define your hostname.
 
     services.tailscale = {
         enable = true;
