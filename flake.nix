@@ -6,7 +6,6 @@
     nixpkgs-older.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-flake.url = "path:./home-manager";
     catppuccin.url = "github:catppuccin/nix";
     agenix.url = "github:ryantm/agenix";
   };
@@ -15,7 +14,6 @@
       nixpkgs,
       nixpkgs-older,
       home-manager,
-      home-manager-flake,
       agenix,
       catppuccin,
       ...
@@ -57,9 +55,6 @@
             ./hardware/desktop.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.jack = home-manager-flake.homeConfigurations.nixos.config;
             }
           ] ++ coreModules ++ desktopAdditionalCore;
         };
