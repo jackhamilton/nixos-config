@@ -34,6 +34,7 @@
         ./user-setups/jack.nix
         ./networking/desktop.nix
         ./desktop.nix
+        ./audio.nix
         catppuccin.nixosModules.catppuccin
       ];
       serverAdditionalCore = [
