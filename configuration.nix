@@ -14,11 +14,12 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  services.automatic-timezoned.enable = true;
-  services.geoclue2 = {
-    enable = true;
-    geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
-  };
+  time.timeZone = lib.mkDefault "America/Chicago";
+  # services.automatic-timezoned.enable = true;
+  # services.geoclue2 = {
+  #   enable = true;
+  #   geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+  # };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
