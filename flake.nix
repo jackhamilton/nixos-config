@@ -8,6 +8,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     catppuccin.url = "github:catppuccin/nix";
     agenix.url = "github:ryantm/agenix";
+    clipboard-sync.url = "github:dnut/clipboard-sync";
   };
   outputs =
     {
@@ -16,6 +17,7 @@
       home-manager,
       agenix,
       catppuccin,
+      clipboard-sync,
       ...
     }@inputs:
     let
@@ -36,6 +38,7 @@
         ./desktop.nix
         ./audio.nix
         catppuccin.nixosModules.catppuccin
+        clipboard-sync.nixosModules.default
       ];
       serverAdditionalCore = [
         ./networking/server.nix

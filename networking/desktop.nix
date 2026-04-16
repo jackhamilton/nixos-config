@@ -1,5 +1,6 @@
 { config, lib, pkgs, modulesPath, hostname, ... }:
 {
+   services.clipboard-sync.enable = true;
    networking.hostName = hostname; # Define your hostname.
 
     services.tailscale = {

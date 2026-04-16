@@ -39,6 +39,24 @@
         "type": "github"
       }
     },
+    "clipboard-sync": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1759253700,
+        "narHash": "sha256-pDsDzWEBaZlT9lHsBZMGm8aBJGncMxqerKwkzjEM/EI=",
+        "owner": "dnut",
+        "repo": "clipboard-sync",
+        "rev": "138a59b8f3044dd9e7dcccd9607bbbb48c14bae6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dnut",
+        "repo": "clipboard-sync",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -153,6 +171,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1717196966,
+        "narHash": "sha256-yZKhxVIKd2lsbOqYd5iDoUIwsRZFqE87smE2Vzf6Ck0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "57610d2f8f0937f39dbd72251e9614b1561942d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1766622938,
         "narHash": "sha256-Eovt/DOCYjFFBZuYbbG9j5jhklzxdNbUGVYYxh3lG3s=",
         "owner": "NixOS",
@@ -171,8 +205,9 @@
       "inputs": {
         "agenix": "agenix",
         "catppuccin": "catppuccin",
+        "clipboard-sync": "clipboard-sync",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-older": "nixpkgs-older"
       }
     },
