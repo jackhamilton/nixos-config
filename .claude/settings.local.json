@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Read(//Users/jackhamilton/.local/share/chezmoi/**)",
+      "Read(//Users/jackhamilton/.config/zsh/**)",
+      "Bash(direnv-instant hook:*)",
+      "Bash(direnv hook:*)"
+    ]
+  }
+}
