@@ -54,9 +54,13 @@
             inherit inputs;
             inherit system;
             hostname = "nixos-desktop";
+            media_mountpoint = "";
+            uid = "1000";
+            gid = "1000";
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/desktop.nix
+            # ./cloud.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
@@ -72,7 +76,7 @@
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/laptop.nix
-	    ./colemak.nix
+	        ./colemak.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }

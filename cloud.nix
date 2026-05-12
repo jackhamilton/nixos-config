@@ -14,6 +14,9 @@ let
 in
 {
   age.secrets.media-password.file = "/etc/nixos/secrets/media-password.age";
+  age.identityPaths = [
+    "/home/jack/.ssh/id_ed25519"
+  ];
   fileSystems = {
     "/media/share" = {
       device = "//192.168.1.11/jack/${media_mountpoint}";
