@@ -7,7 +7,7 @@ let
   systems = [ laptop qbittorrent seafile arrsuite desktop ];
 in
 {
-  "/etc/nixos/secrets/media-password.age" = {
+  "secrets/media-password.age" = {
     publicKeys = systems;
     armor = true;
   };

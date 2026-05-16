@@ -8,15 +8,16 @@
         useRoutingFeatures = "client";
     };
 
-  networking.proxy.default = "http://192.168.49.1:8000";
-  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  environment.sessionVariables = {
-    http_proxy="http://192.168.49.1:8000";
-    https_proxy="http://192.168.49.1:8000";
-    HTTP_PROXY="http://192.168.49.1:8000";
-    HTTPS_PROXY="http://192.168.49.1:8000";
-  };
+  # pdanet+
+  # networking.proxy.default = "http://192.168.49.1:8000";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  #
+  # environment.sessionVariables = {
+  #   http_proxy="http://192.168.49.1:8000";
+  #   https_proxy="http://192.168.49.1:8000";
+  #   HTTP_PROXY="http://192.168.49.1:8000";
+  #   HTTPS_PROXY="http://192.168.49.1:8000";
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

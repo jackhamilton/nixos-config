@@ -37,6 +37,7 @@
         ./networking/desktop.nix
         ./desktop.nix
         ./audio.nix
+        ./drivers.nix
         catppuccin.nixosModules.catppuccin
         clipboard-sync.nixosModules.default
       ];
@@ -60,7 +61,7 @@
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/desktop.nix
-            # ./cloud.nix
+            ./cloud.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }

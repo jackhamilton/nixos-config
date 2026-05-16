@@ -10,7 +10,7 @@
 }:
 let
   # i know it says not to do this but my deployed machines are secure (every sysadmin ever)
-  media-password = builtins.readFile config.age.secrets.media-password.path;
+  media-password = builtins.readFile /etc/nixos/secrets/media-password.age;
 in
 {
   age.secrets.media-password.file = "/etc/nixos/secrets/media-password.age";
