@@ -4,6 +4,7 @@
         pkgs,
         modulesPath,
         media_mountpoint,
+        home_dir,
         uid,
         gid,
         ...
@@ -15,7 +16,7 @@
             path = "/etc/cifs-credentials/media-share";
         };
         identityPaths = [
-            "/home/jack/.ssh/id_ed25519"
+            "${home_dir}/.ssh/id_ed25519"
         ];
     };
 

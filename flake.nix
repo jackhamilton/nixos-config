@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-older.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +15,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       nixpkgs-older,
       home-manager,
       agenix,
@@ -27,7 +29,6 @@
       coreModules = [
         ./configuration.nix
         ./zsh.nix
-        ./theme.nix
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
       ];
@@ -40,6 +41,7 @@
         ./desktop.nix
         ./audio.nix
         ./drivers.nix
+        ./theme.nix
         catppuccin.nixosModules.catppuccin
         clipboard-sync.nixosModules.default
       ];
@@ -58,6 +60,7 @@
             inherit system;
             hostname = "nixos-desktop";
             media_mountpoint = "";
+            home_dir = "/home/jack";
             uid = "1000";
             gid = "1000";
           }; # lets modules access inputs if needed
@@ -111,6 +114,7 @@
               443
             ];
             media_mountpoint = "seafile";
+            home_dir = "/home/seafile";
             uid = "seafile";
             gid = "seafile";
           };
@@ -130,6 +134,7 @@
             hostname = "qBittorrent";
             ip_address = "192.168.1.19";
             media_mountpoint = "";
+            home_dir = "/home/qbittorrent";
             uid = "1000";
             gid = "1000";
             allowedUDPPorts = [
@@ -211,12 +216,14 @@
             uid = "1000";
             gid = "media";
             media_mountpoint = "";
+            home_dir = "/home/radarr";
             allowedUDPPorts = [];
             allowedTCPPorts = [];
           };
           modules = [
             ./hardware/arrsuite.nix
             ./misc/arrsuite-config.nix
+            ./server-programs/arrsuite.nix
             ./user-setups/arr-users.nix
             ./cloud.nix
           ] ++ coreModules ++ serverAdditionalCore;
