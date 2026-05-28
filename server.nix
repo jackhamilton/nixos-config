@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+    services.swapspace.enable = true;
+
     systemd.suppressedSystemUnits = [
         "dev-mqueue.mount"
         "sys-kernel-debug.mount"

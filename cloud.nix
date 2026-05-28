@@ -1,36 +1,38 @@
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  media_mountpoint,
-  uid,
-  gid,
-  ...
+    config,
+        lib,
+        pkgs,
+        modulesPath,
+        media_mountpoint,
+        uid,
+        gid,
+        ...
 }:
-let
-  # i know it says not to do this but my deployed machines are secure (every sysadmin ever)
-  media-password = builtins.readFile /etc/nixos/secrets/media-password.age;
-in
 {
-  age.secrets.media-password.file = "/etc/nixos/secrets/media-password.age";
-  age.identityPaths = [
-    "/home/jack/.ssh/id_ed25519"
-  ];
-  fileSystems = {
-    "/media/share" = {
-      device = "//192.168.1.11/jack/${media_mountpoint}";
-      fsType = "cifs";
-      options = [
-        "username=jack"
-        "password=${media-password}"
-        "uid=${uid}"
-        "gid=${gid}"
-        "file_mode=0777"
-        "dir_mode=0777"
-        "noperm"
-        "nounix"
-      ];
+    age = {
+        secrets.media-password = {
+            file = /etc/nixos/secrets/media-password.age;
+            path = "/etc/cifs-credentials/media-share";
+        };
+        identityPaths = [
+            "/home/jack/.ssh/id_ed25519"
+        ];
     };
-  };
+
+    fileSystems = {
+        "/media/share" = {
+            device = "//192.168.1.11/jack/${media_mountpoint}";
+            fsType = "cifs";
+            options = [
+                "credentials=/etc/cifs-credentials/media-share"
+                    "uid=${uid}"
+                    "gid=${gid}"
+                    "file_mode=0777"
+                    "dir_mode=0777"
+                    "noperm"
+                    "nounix"
+                    "x-systemd.automount"
+            ];
+        };
+    };
 }

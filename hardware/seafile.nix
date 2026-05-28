@@ -16,11 +16,6 @@
       fsType = "ext4";
     };
 
-  fileSystems."/media/share" =
-    { device = "//192.168.1.11/jack/seafile";
-      fsType = "cifs";
-    };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

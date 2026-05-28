@@ -9,6 +9,7 @@
     catppuccin.url = "github:catppuccin/nix";
     agenix.url = "github:ryantm/agenix";
     clipboard-sync.url = "github:dnut/clipboard-sync";
+    nixgl.url = "github:guibou/nixGL";
   };
   outputs =
     {
@@ -18,6 +19,7 @@
       agenix,
       catppuccin,
       clipboard-sync,
+      nixgl,
       ...
     }@inputs:
     let
@@ -63,7 +65,10 @@
             ./hardware/desktop.nix
             ./cloud.nix
             {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
+                environment.systemPackages = [ agenix.packages.${system}.default ];
+            }
+            {
+                nixpkgs.overlays = [nixgl.overlay];
             }
           ] ++ coreModules ++ desktopAdditionalCore;
         };

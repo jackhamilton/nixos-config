@@ -1,11 +1,17 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, pkgs-unstable, config, ... }:
 {
+    imports = [
+# Use seerr service from nixos-unstable channel.
+# sudo nix-channel --add https://channels.nixos.org/nixos-unstable nixos-unstable
+        <nixos-unstable/nixos/modules/services/seerr.nix>
+    ];
+    services.seerr.enable = true;
+
     environment.systemPackages = with pkgs; [
         prowlarr
         radarr
         lidarr
         sonarr
-        # whisparr
         readarr
         bazarr
     ];
@@ -87,19 +93,6 @@
             User = "bazarr";
         };
     };
-    #
-    # systemd.services."whisparr" = {
-    #     enable = true;
-    #     description = "Whisparr service";
-    #     path = [ pkgs.whisparr pkgs.sqlite pkgs.curl ];
-    #     wantedBy = [ "multi-user.target" ];
-    #     after = [ "network.target" ];
-    #     serviceConfig = {
-    #         ExecStart = "${pkgs.whisparr}/bin/Whisparr -nobrowser -data=/var/lib/whisparr/";
-    #         Type = "simple";
-    #         User = "whisparr";
-    #     };
-    # };
 
     services.nginx = {
         enable = true;
