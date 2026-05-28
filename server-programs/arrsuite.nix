@@ -1,19 +1,21 @@
-{ lib, pkgs, pkgs-unstable, config, ... }:
+{ lib, inputs, pkgs, config, ... }:
 {
     imports = [
-# Use seerr service from nixos-unstable channel.
-# sudo nix-channel --add https://channels.nixos.org/nixos-unstable nixos-unstable
-        <nixos-unstable/nixos/modules/services/seerr.nix>
+        "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/seerr.nix"
     ];
-    services.seerr.enable = true;
+
+    services.seerr = {
+        enable = true;
+        package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.seerr;
+        openFirewall = true;
+    };
 
     environment.systemPackages = with pkgs; [
         prowlarr
-        radarr
-        lidarr
-        sonarr
-        readarr
-        bazarr
+            radarr
+            lidarr
+            sonarr
+            readarr
     ];
 
     systemd.services."prowlarr" = {
@@ -78,19 +80,6 @@
             ExecStart = "${pkgs.readarr}/bin/Readarr -nobrowser -data=/var/lib/readarr/";
             Type = "simple";
             User = "readarr";
-        };
-    };
-
-    systemd.services."bazarr" = {
-        enable = true;
-        description = "Bazarr service";
-        path = [ pkgs.bazarr pkgs.sqlite pkgs.curl ];
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-        serviceConfig = {
-            ExecStart = "${pkgs.bazarr}/bin/bazarr -nobrowser -data=/var/lib/bazarr/";
-            Type = "simple";
-            User = "bazarr";
         };
     };
 
