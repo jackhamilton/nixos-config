@@ -67,6 +67,7 @@
           modules = [
             ./hardware/desktop.nix
             ./cloud.nix
+            ./kdeconnect.nix
             {
                 environment.systemPackages = [ agenix.packages.${system}.default ];
             }
