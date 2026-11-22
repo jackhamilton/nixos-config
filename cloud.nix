@@ -12,7 +12,7 @@
 {
     age = {
         secrets.media-password = {
-            file = /etc/nixos/secrets/media-password.age;
+            file = ./secrets/media-password.age;
             path = "/etc/cifs-credentials/media-share";
         };
         identityPaths = [

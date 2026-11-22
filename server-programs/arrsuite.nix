@@ -1,7 +1,13 @@
 { lib, inputs, pkgs, config, ... }:
 {
     imports = [
-        "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/seerr.nix"
+        ({ config, pkgs, ... }@moduleArgs:
+            (import "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/seerr.nix") (moduleArgs // {
+                utils = import "${inputs.nixpkgs-unstable}/nixos/lib/utils.nix" {
+                    inherit config;
+                    inherit (moduleArgs) lib pkgs;
+                };
+            }))
     ];
 
     services.seerr = {
