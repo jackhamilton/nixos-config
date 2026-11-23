@@ -45,6 +45,6 @@
   };
   users.users."root".openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfVyUli9cll2BTHAAB8v2pHb3RvI5ycATRIb2YV8Mm6 jack@nixos"
-  ];
+  ] ++ import ../user-setups/authorized-client-keys.nix;
   services.fail2ban.enable = true;
 }

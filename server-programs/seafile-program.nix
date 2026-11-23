@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 {
+    age.secrets.seafile-initial-admin-password = {
+        file = ../secrets/seafile-initial-admin-password.age;
+        mode = "0400";
+    };
+
     environment.systemPackages = with pkgs; [ socat ];
 
     systemd.services.socat-seahub = {
@@ -25,7 +30,7 @@
         enable = true;
 
         adminEmail = "jackham800@gmail.com";
-        initialAdminPassword = "[REDACTED]";
+        initialAdminPassword = "[exec ${pkgs.coreutils}/bin/cat ${config.age.secrets.seafile-initial-admin-password.path}]";
 
         dataDir = "/media/share";
 

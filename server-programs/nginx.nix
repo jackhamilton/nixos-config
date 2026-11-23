@@ -1,5 +1,10 @@
 { config, pkgs, modulesPath, ... }:
 {
+    age.secrets.homepage-dashboard-env = {
+        file = ../secrets/homepage-dashboard-env.age;
+        mode = "0400";
+    };
+
     security.acme = {
         acceptTerms = true;
         defaults.email = "jackham800@gmail.com";
@@ -183,6 +188,7 @@
     };
     services.homepage-dashboard = {
         enable = true;
+        environmentFiles = [ config.age.secrets.homepage-dashboard-env.path ];
         bookmarks = [
             {
                 Productivity = [
@@ -248,7 +254,7 @@
                             widget = {
                                 type = "plex";
                                 url = "http://plex.jackhamilton.uk";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_PLEX_API_KEY}}";
                             };
                         };
                     }
@@ -258,7 +264,7 @@
                             widget = {
                                 type = "jellyfin";
                                 url = "http://jellyfin.jackhamilton.uk";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}";
                             };
                         };
                     }
@@ -278,7 +284,7 @@
                                 type = "qbittorrent";
                                 url = "http://192.168.1.19";
                                 username = "jack";
-                                password = "[REDACTED]";
+                                password = "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}";
                             };
                         };
                     }
@@ -289,7 +295,7 @@
                             widget = {
                                 type = "radarr";
                                 url = "http://192.168.1.17:7878";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_RADARR_API_KEY}}";
                             };
                         };
                     }
@@ -300,7 +306,7 @@
                             widget = {
                                 type = "sonarr";
                                 url = "http://192.168.1.17:8989";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_SONARR_API_KEY}}";
                             };
                         };
                     }
@@ -311,7 +317,7 @@
                             widget = {
                                 type = "prowlarr";
                                 url = "http://192.168.1.17:9696";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}";
                             };
                         };
                     }
@@ -338,7 +344,7 @@
                                 type = "openwrt";
                                 url = "https://192.168.1.1/cgi-bin/luci/";
                                 username = "jack";
-                                password = "[REDACTED]";
+                                password = "{{HOMEPAGE_VAR_OPENWRT_PASSWORD}}";
                             };
                         };
                     }
@@ -349,7 +355,7 @@
                                 type = "proxmox";
                                 url = "https://192.168.1.8";
                                 username = "root";
-                                password = "[REDACTED]";
+                                password = "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}";
                             };
                         };
                     }
@@ -360,7 +366,7 @@
                                 type = "pihole";
                                 url = "https://192.168.1.2";
                                 version = 6;
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_PIHOLE_API_KEY}}";
                             };
                         };
                     }
@@ -370,7 +376,7 @@
                             widget = {
                                 type = "truenas";
                                 url = "http://192.168.1.11";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}";
                                 nasType = "core";
                             };
                         };
@@ -387,7 +393,7 @@
                                 type = "cloudflared";
                                 accountid = "3aded00e71934a365a343dbaa1c4ee4d";
                                 tunnelid = "d85de4d6-365d-4919-9d72-11fd4bf8cf4b";
-                                key = "[REDACTED]";
+                                key = "{{HOMEPAGE_VAR_CLOUDFLARE_WIDGET_KEY}}";
                             };
                         };
                     }

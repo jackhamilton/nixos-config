@@ -68,6 +68,7 @@
             ./hardware/desktop.nix
             ./cloud.nix
             ./kdeconnect.nix
+            ./ssh-client-key.nix
             {
                 environment.systemPackages = [ agenix.packages.${system}.default ];
             }
@@ -87,6 +88,7 @@
           modules = [
             ./hardware/laptop.nix
 	        ./colemak.nix
+            ./ssh-client-key.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
