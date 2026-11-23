@@ -342,7 +342,7 @@
                             href = "https://192.168.1.1/cgi-bin/luci/";
                             widget = {
                                 type = "openwrt";
-                                url = "https://192.168.1.1/cgi-bin/luci/";
+                                url = "https://191.168.1.1/cgi-bin/luci/";
                                 username = "jack";
                                 password = "{{HOMEPAGE_VAR_OPENWRT_PASSWORD}}";
                             };
