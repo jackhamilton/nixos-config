@@ -7,7 +7,7 @@
 }:
 {
     environment.systemPackages = with pkgs; [
-        nixgl.auto.nixGLDefault
+        nixgl.nixGLIntel
         pkgs.qmk-udev-rules
    ];
 
