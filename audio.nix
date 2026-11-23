@@ -10,10 +10,6 @@
 {
     security.rtkit.enable = true;
 
-    environment.systemPackages = [
-        pkgs.easyeffects
-    ];
-
     services.pipewire = {
         enable = true;
         alsa.enable = true;

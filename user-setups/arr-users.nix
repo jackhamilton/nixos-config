@@ -1,7 +1,6 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 let
-    archKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmrioi7+kikRVGjf1dmZYPlQhWn18FuUj5Z0E7swwI8 jack@arch";
-    clientKeys = import ./authorized-client-keys.nix;
+    clientKeys = import ../networking/authorized-client-keys.nix;
     userPasswordHash = config.age.secrets.arr-user-password-hash.path;
 in
 {
@@ -20,7 +19,7 @@ in
             home = "/home/prowlarr/";
             description = "prowlarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         sonarr = {
@@ -28,7 +27,7 @@ in
             home = "/home/sonarr/";
             description = "sonarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         radarr = {
@@ -36,7 +35,7 @@ in
             home = "/home/radarr/";
             description = "radarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         lidarr = {
@@ -44,7 +43,7 @@ in
             home = "/home/lidarr/";
             description = "lidarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         whisparr = {
@@ -52,7 +51,7 @@ in
             home = "/home/whisparr/";
             description = "whisparr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         readarr = {
@@ -60,7 +59,7 @@ in
             home = "/home/readarr/";
             description = "readarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         bazarr = {
@@ -68,7 +67,7 @@ in
             home = "/home/bazarr/";
             description = "bazarr";
             extraGroups = [ "wheel" "media" ];
-            openssh.authorizedKeys.keys = [ archKey ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
         jack = {
@@ -76,10 +75,7 @@ in
             home = "/home/jack/";
             description = "Jack";
             extraGroups = [ "wheel" ];
-            openssh.authorizedKeys.keys = [
-                archKey
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVtPQ7vtCZEClM2/Tui+gU7BArbN5unegQaAkAhpcT9 jack@laptop-servarr"
-            ] ++ clientKeys;
+            openssh.authorizedKeys.keys = clientKeys;
             hashedPasswordFile = userPasswordHash;
         };
     };

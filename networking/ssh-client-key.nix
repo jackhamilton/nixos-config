@@ -1,8 +1,8 @@
 { config, hostname, ... }:
 let
   keyFile = {
-    nixos-laptop = ./secrets/ssh-client-nixos-laptop.age;
-    nixos-desktop = ./secrets/ssh-client-nixos-desktop.age;
+    nixos-laptop = ../secrets/ssh-client-nixos-laptop.age;
+    nixos-desktop = ../secrets/ssh-client-nixos-desktop.age;
   }.${hostname};
 in
 {

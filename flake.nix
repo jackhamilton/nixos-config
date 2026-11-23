@@ -28,27 +28,26 @@
       system = "x86_64-linux";
       coreModules = [
         ./configuration.nix
-        ./zsh.nix
+        ./console/fish.nix
         home-manager.nixosModules.home-manager
         agenix.nixosModules.default
       ];
       desktopAdditionalCore = [
         ./boot.nix
-        ./console.nix
+        ./console/console.nix
         ./services.nix
         ./user-setups/jack.nix
         ./networking/desktop.nix
-        ./desktop.nix
+        ./host-specific/desktop.nix
         ./audio.nix
-        ./drivers.nix
-        ./theme.nix
+        ./host-specific/graphics-drivers.nix
+        ./theme/theme.nix
         catppuccin.nixosModules.catppuccin
         clipboard-sync.nixosModules.default
       ];
       serverAdditionalCore = [
         ./networking/server.nix
-        ./server.nix
-        ./container.nix
+        ./server-setups/server.nix
       ];
     in
     {
@@ -66,9 +65,9 @@
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/desktop.nix
-            ./cloud.nix
-            ./kdeconnect.nix
-            ./ssh-client-key.nix
+            ./networking/cloud.nix
+            ./programs/kdeconnect.nix
+            ./networking/ssh-client-key.nix
             {
                 environment.systemPackages = [ agenix.packages.${system}.default ];
             }
@@ -87,8 +86,8 @@
           }; # lets modules access inputs if needed
           modules = [
             ./hardware/laptop.nix
-	        ./colemak.nix
-            ./ssh-client-key.nix
+	        ./host-specific/colemak.nix
+            ./networking/ssh-client-key.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
@@ -123,9 +122,9 @@
           };
           modules = [
             ./hardware/seafile.nix
-            ./server-programs/seafile-program.nix
-            ./cloud.nix
-            ./wireguard.nix
+            ./server-setups/server-programs/seafile-program.nix
+            ./networking/cloud.nix
+            ./networking/wireguard.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
@@ -155,9 +154,9 @@
           };
           modules = [
             ./hardware/qbittorrent.nix
-            ./server-programs/qbittorrent.nix
-            ./wireguard.nix
-            ./cloud.nix
+            ./server-setups/server-programs/qbittorrent.nix
+            ./networking/wireguard.nix
+            ./networking/cloud.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
@@ -183,7 +182,7 @@
           };
           modules = [
             ./hardware/radicale.nix
-            ./server-programs/radicale.nix
+            ./server-setups/server-programs/radicale.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
@@ -205,7 +204,7 @@
           };
           modules = [
             ./hardware/nginx.nix
-            ./server-programs/nginx.nix
+            ./server-setups/server-programs/nginx.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 
@@ -225,10 +224,10 @@
           };
           modules = [
             ./hardware/arrsuite.nix
-            ./misc/arrsuite-config.nix
-            ./server-programs/arrsuite.nix
+            ./server-setups/arrsuite-config.nix
+            ./server-setups/server-programs/arrsuite.nix
             ./user-setups/arr-users.nix
-            ./cloud.nix
+            ./networking/cloud.nix
           ] ++ coreModules ++ serverAdditionalCore;
         };
 

@@ -8,23 +8,23 @@ let
   systems = [ laptop qbittorrent seafile arrsuite desktop ];
 in
 {
-  "secrets/media-password.age" = {
+  "media-password.age" = {
     publicKeys = systems;
     armor = true;
   };
-  "secrets/ssh-client-nixos-laptop.age" = {
+  "ssh-client-nixos-laptop.age" = {
     publicKeys = [ laptop ];
   };
-  "secrets/ssh-client-nixos-desktop.age" = {
+  "ssh-client-nixos-desktop.age" = {
     publicKeys = [ desktop ];
   };
-  "secrets/homepage-dashboard-env.age" = {
+  "homepage-dashboard-env.age" = {
     publicKeys = [ nginx ];
   };
-  "secrets/arr-user-password-hash.age" = {
+  "arr-user-password-hash.age" = {
     publicKeys = [ arrsuite ];
   };
-  "secrets/seafile-initial-admin-password.age" = {
+  "seafile-initial-admin-password.age" = {
     publicKeys = [ seafile ];
   };
 }

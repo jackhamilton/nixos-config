@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
     age.secrets.seafile-initial-admin-password = {
-        file = ../secrets/seafile-initial-admin-password.age;
+        file = ../../secrets/seafile-initial-admin-password.age;
         mode = "0400";
     };
 

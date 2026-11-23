@@ -13,7 +13,7 @@ in
 {
   environment.systemPackages = with pkgs; [
     astronautSakura
-    wezterm
+    ghostty
   ];
   boot.loader = {
     efi.canTouchEfiVariables = true;

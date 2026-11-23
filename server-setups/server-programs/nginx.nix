@@ -1,7 +1,7 @@
 { config, pkgs, modulesPath, ... }:
 {
     age.secrets.homepage-dashboard-env = {
-        file = ../secrets/homepage-dashboard-env.age;
+        file = ../../secrets/homepage-dashboard-env.age;
         mode = "0400";
     };
 
