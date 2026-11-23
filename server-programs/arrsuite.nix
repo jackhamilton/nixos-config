@@ -1,26 +1,7 @@
-{ lib, inputs, pkgs, config, ... }:
+{ pkgs, ... }:
 {
-    imports = [
-        ({ lib, ... }: {
-            options.system.moduleStateRevisions = lib.mkOption {
-                type = lib.types.attrsOf lib.types.ints.unsigned;
-                default = {};
-                internal = true;
-                description = "State revisions declared by NixOS modules.";
-            };
-        })
-        ({ config, pkgs, ... }@moduleArgs:
-            (import "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/seerr.nix") (moduleArgs // {
-                utils = import "${inputs.nixpkgs-unstable}/nixos/lib/utils.nix" {
-                    inherit config;
-                    inherit (moduleArgs) lib pkgs;
-                };
-            }))
-    ];
-
     services.seerr = {
         enable = true;
-        package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.seerr;
         openFirewall = true;
     };
 

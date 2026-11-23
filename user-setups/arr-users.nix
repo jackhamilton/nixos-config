@@ -67,7 +67,10 @@
             home = "/home/jack/";
             description = "Jack";
             extraGroups = [ "wheel" ];
-            openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmrioi7+kikRVGjf1dmZYPlQhWn18FuUj5Z0E7swwI8 jack@arch" ];
+            openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmrioi7+kikRVGjf1dmZYPlQhWn18FuUj5Z0E7swwI8 jack@arch"
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVtPQ7vtCZEClM2/Tui+gU7BArbN5unegQaAkAhpcT9 jack@laptop-servarr"
+            ];
             hashedPassword = "[REDACTED]";
         };
     };
