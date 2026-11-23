@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 {
     networking.firewall.enable = false;
-    networking.wireless.enable = lib.mkForce false;
     security.sudo = {
         enable = true;
         extraRules = [{

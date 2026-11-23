@@ -9,6 +9,8 @@
   ...
 }:
 {
+  networking.wireless.enable = lib.mkForce false;
+
   networking = {
     defaultGateway = {
       address = "192.168.1.1";
